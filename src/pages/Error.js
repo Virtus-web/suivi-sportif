@@ -47,7 +47,7 @@ export class Error extends Component {
                 <ErrorTitle>404</ErrorTitle>
                 <ErrorDescription>Oups! La page que vous demandez n'existe pas.</ErrorDescription>
                 {/* <ErrorBack exact to="/user">Retourner sur la page de profile</ErrorBack> */}
-                <ErrorBack exact to="/suivi-sportif">Retourner sur la page de profile</ErrorBack>
+                <ErrorBack exact to="/">Retourner sur la page de profile</ErrorBack>
             </div>
         )
     }
