@@ -1,0 +1,55 @@
+/* .App {
+  height: 100vh;
+} */
+
+.App-link {
+  color: #61dafb;
+}
+
+.tooltipActivity {
+    background-color: red;
+    color: white;
+    font-size: 0.7em;
+    width: 4em;
+    height: auto;
+    vertical-align: middle;
+    padding: 0.5em;
+}
+
+.tooltipSessions {
+    background-color: white;
+    color: black;
+    font-size: 0.7em;
+    width: 5em;
+    height: auto;
+    vertical-align: middle;
+    padding: 0.5em;
+}
+
+.legend {
+    width: 17em;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    right: 7.7em;
+    top: 0;
+}
+
+.legend1 {
+    color: black;
+    font-size: 1.5em;
+}
+
+.legend2 {
+    color: red;
+    font-size: 1.5em;
+}
+
+.legend1 > span {
+    font-size: 0.6em;
+    color: grey;
+}
+.legend2 > span {
+    font-size: 0.6em;
+    color: grey;
+}

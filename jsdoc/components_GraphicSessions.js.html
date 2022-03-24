@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/GraphicSessions.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/GraphicSessions.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useParams } from 'react-router-dom'
+import { useCall } from '../utils/hooks'
+import { Loader } from '../utils/styles/loader'
+import styled from 'styled-components'
+import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts'
+
+
+const StyledGraphic = styled.div`
+    height: 13em;
+    width: 12em;
+    background-color: red;
+    border-radius: 0.5em;
+`
+
+const GraphTitle = styled.h2`
+    font-size: 0.9em;
+    color: white;
+    width: 10em;
+    position: relative;
+    top: 1em;
+    left: 1em;
+`
+
+/**
+* @constant weekDays
+* @type {Array.&lt;String="Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche">}
+*/
+const weekDays = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"]
+
+/**
+* This function modifies the date format
+* @param {Number} tick 
+* @returns {String}  
+*/
+const formatDate = (tick) => {
+    
+    return [...weekDays[tick-1][0]]
+}
+
+/**
+* 
+* @typedef {{payload: Array, active: Boolean}} propType
+*/
+
+/**
+* This stateless component customize the tooltip of the graphic 
+* @param {propType} active
+* @param {propType} payload
+*/
+function CustomTooltip({ active, payload }) {
+    if (active) {
+        return (
+            &lt;div className="tooltipSessions">
+                &lt;p>{payload[0].value} min&lt;/p>
+            &lt;/div>
+        )
+    }
+    return null
+}
+
+/**
+* This class component manage the display of the average duration of daily sessions on a line chart
+*/
+const GraphicSessions = () => {
+    
+    /**
+    * @typedef {{profileId: Number}} URLparameter
+    */
+
+    /**
+    * @type {URLparameter} profileId
+    */
+    const { profileId }  = useParams()   
+    const { data, isLoading, error } = useCall (
+        `http://localhost:3000/user/${profileId}/average-sessions`
+    )
+
+    /**
+    * @constant
+    * @type {Array.&lt;String|Object|Number>}
+    * @default
+    */
+    const profileData = data?.data
+
+    if (error) {
+        return &lt;span>Oups il y a eu un problème&lt;/span>
+    }
+    
+    return (
+
+        &lt;StyledGraphic>
+            &lt;GraphTitle>Durée moyenne des sessions&lt;/GraphTitle>
+            {
+                isLoading ? (
+                    &lt;Loader />
+                ) : (
+                    &lt;ResponsiveContainer width="100%" height="75%">
+                        &lt;LineChart width={300} height={100} data={profileData?.sessions} margin={{ top: 30, right: 0, left: 5, bottom: 15 }}>
+                            &lt;Line type="monotone" dataKey="sessionLength" stroke="white" strokeWidth={2} />
+                            &lt;Tooltip content={&lt;CustomTooltip />} wrapperStyle={{ width: 100 }} cursor={{ stroke: '#850606', strokeWidth: 1 }} />
+                            &lt;XAxis dataKey="day" axisLine={false} tickLine={false} tickMargin={20} tick={{fill: 'white', fontSize: 10}} tickFormatter={formatDate} />
+                        &lt;/LineChart>
+                    &lt;/ResponsiveContainer>
+                )
+            }
+        &lt;/StyledGraphic>
+    )
+}
+
+export default GraphicSessions</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="-_app.module_js.html">js</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CustomTooltip">CustomTooltip</a></li><li><a href="global.html#formatDate">formatDate</a></li><li><a href="global.html#GraphicActivity">GraphicActivity</a></li><li><a href="global.html#graphicData">graphicData</a></li><li><a href="global.html#GraphicMapping">GraphicMapping</a></li><li><a href="global.html#GraphicScore">GraphicScore</a></li><li><a href="global.html#GraphicSessions">GraphicSessions</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#manageLabel">manageLabel</a></li><li><a href="global.html#mappingLabels">mappingLabels</a></li><li><a href="global.html#Nutrition">Nutrition</a></li><li><a href="global.html#profileScore">profileScore</a></li><li><a href="global.html#RenderLegend">RenderLegend</a></li><li><a href="global.html#useCall">useCall</a></li><li><a href="global.html#weekDays">weekDays</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Thu Feb 10 2022 11:39:07 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

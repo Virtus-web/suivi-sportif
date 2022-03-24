@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/GraphicActivity.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/GraphicActivity.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>//// @ts-check
+
+import { useParams } from 'react-router-dom'
+import { useCall } from '../utils/hooks'
+import { Loader } from '../utils/styles/loader'
+import styled from 'styled-components'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, CartesianAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
+
+const StyledGraphic = styled.div`
+    margin-bottom: 2em;
+    height: 15em;
+    width: auto;
+    padding: 0.5em;
+    background-color: rgb(245,245,245);
+    border-radius: 0.5em;
+`
+const GraphTitle = styled.h2`
+    font-size: 1.3em;
+`
+
+/**
+* 
+* @typedef {{payload: Array, active: Boolean}} propType
+*/
+
+/**
+* This stateless component customize the tooltip of the graphic 
+* @param {propType} active
+* @param {propType} payload
+*/
+function CustomTooltip({ active, payload }) {
+    if (active) {
+        return (
+            &lt;div className="tooltipActivity">
+                &lt;p>{payload[0].value} kg&lt;/p>
+                &lt;p>{payload[1].value} kCal&lt;/p>
+            &lt;/div>
+        )
+    }
+    return null
+}
+
+/**
+* This stateless component customize the legend of the graphic 
+* @param {propType} payload Liste of items
+*/
+const RenderLegend = ({payload}) => {
+
+    //On aurait pu écrire simplement props à la place de {payload} et
+    // const { payload } = props;
+
+    return (
+        &lt;ul className="legend">
+            &lt;li className="legend1">&lt;span>{payload[0].value} (kg)&lt;/span>&lt;/li>
+            &lt;li className="legend2">&lt;span>{payload[1].value} brûlées (kcal)&lt;/span>&lt;/li>
+        &lt;/ul>
+    )
+}
+
+/**
+* This function modifies the date format
+* @param {Date} tick 
+* @returns {Number}  
+*/
+const formatDate = (tick) => {
+    const date = new Date(tick)
+    return date.getDate()
+}
+
+/**
+* This class component manage the display of the daily activity bar chart
+*/
+const GraphicActivity = () => {
+
+    /**
+    * @typedef {{profileId: Number}} URLparameter
+    */
+
+    /**
+    * @type {URLparameter} profileId
+    */
+    const { profileId }  = useParams()
+    const { data, isLoading, error } = useCall (
+        `http://localhost:3000/user/${profileId}/activity`
+    )
+
+    /**
+    * @constant
+    * @type {Array.&lt;String|Object|Number>}
+    * @default
+    */
+    const profileData = data?.data
+
+    if (error) {
+        return &lt;span>Oups il y a eu un problème&lt;/span>
+    }
+    
+    return (
+
+        &lt;StyledGraphic>
+            &lt;GraphTitle>Activité Quotidienne&lt;/GraphTitle>
+            {
+                isLoading ? (
+                    &lt;Loader />
+                ) : (
+                    &lt;ResponsiveContainer width="100%" height="75%">
+                        &lt;BarChart
+                        width={500}
+                        height={300}
+                        data={profileData?.sessions}
+                        margin={{
+                            top: 0,
+                            right: 30,
+                            left: -55,
+                            bottom: 10,
+                        }}
+                        >
+                            &lt;CartesianGrid strokeDasharray="2" vertical={false} />
+                            &lt;CartesianAxis width={50} />
+                            &lt;XAxis dataKey="day" axisLine={true} tickLine={false} tickMargin={20} tickFormatter={formatDate} />
+                            &lt;YAxis orientation="right" domain={["auto", "auto"]} tickCount={4} hide={false} axisLine={false} tickLine={false} tickMargin={35} />
+                            &lt;Tooltip content={&lt;CustomTooltip />} wrapperStyle={{ width: 150 }} cursor={{ fill: 'grey' }} contentStyle={{backgroundColor: 'red', color:'white'}} itemStyle={{color:'white'}} />
+                            &lt;Legend content={&lt;RenderLegend />} width={200} iconType={"circle"} iconSize={10} wrapperStyle={{ top: -70, right: 10 }} verticalAlign="left" />
+                            &lt;Bar dataKey="kilogram" fill="black" barSize={10} radius={[10, 10, 0, 0]} />
+                            &lt;Bar dataKey="calories" fill="red" barSize={10} radius={[10, 10, 0, 0]} tooltipItemColor="black" />
+                        &lt;/BarChart>
+                    &lt;/ResponsiveContainer>
+                )
+            }
+        &lt;/StyledGraphic>
+    )
+}
+
+export default GraphicActivity</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="-_app.module_js.html">js</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CustomTooltip">CustomTooltip</a></li><li><a href="global.html#formatDate">formatDate</a></li><li><a href="global.html#GraphicActivity">GraphicActivity</a></li><li><a href="global.html#graphicData">graphicData</a></li><li><a href="global.html#GraphicMapping">GraphicMapping</a></li><li><a href="global.html#GraphicScore">GraphicScore</a></li><li><a href="global.html#GraphicSessions">GraphicSessions</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#manageLabel">manageLabel</a></li><li><a href="global.html#mappingLabels">mappingLabels</a></li><li><a href="global.html#Nutrition">Nutrition</a></li><li><a href="global.html#profileScore">profileScore</a></li><li><a href="global.html#RenderLegend">RenderLegend</a></li><li><a href="global.html#useCall">useCall</a></li><li><a href="global.html#weekDays">weekDays</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Thu Feb 10 2022 11:39:07 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
