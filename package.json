@@ -2,6 +2,7 @@
   "name": "nicolas-pedenau_12_27012022",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Virtus-web.github.io/suivi-sportif",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
@@ -20,7 +21,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "jsdoc": "jsdoc -c jsdoc-config.json"
+    "jsdoc": "jsdoc -c jsdoc-config.json",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -41,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^3.2.3",
     "jsdoc": "^3.6.10"
   }
 }
