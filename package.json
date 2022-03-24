@@ -1,8 +1,8 @@
 {
-  "name": "nicolas-pedenau_12_27012022",
+  "name": "suivi-sportif",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Virtus-web.github.io",
+  "homepage": "https://Virtus-web.github.io/suivi-sportif/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",

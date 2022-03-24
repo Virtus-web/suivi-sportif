@@ -23,8 +23,8 @@ const App = () => {
                 <StyledGlobalStyle />
                 <Header />
                 <Switch>
-                    <Route exact path="/" component={HomePage} />
-                    <Route exact path="/user/:profileId" render={(props) => <ProfilePage {...props} />} />
+                    <Route exact path="/suivi-sportif" component={HomePage} />
+                    <Route exact path="/suivi-sportif/user/:profileId" render={(props) => <ProfilePage {...props} />} />
                     <Route path="*" component={Error} />
                 </Switch>                 
             </BrowserRouter>
