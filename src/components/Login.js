@@ -39,7 +39,7 @@ const ProfileName = styled.h2`
 function Login({id, icon, name}) {
 
     return (
-        <Wrapper to={`/user/${id}`}>
+        <Wrapper to={`/suivi-sportif/user/${id}`}>
             <Picture src={icon} alt="profile-icon" isGirl={name === "Cecilia"} />
             <ProfileName isGirl={name === "Cecilia"}>{name}</ProfileName>
         </Wrapper>
