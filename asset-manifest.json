@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/suivi-sportif/static/css/main.d08e44fd.css",
+    "main.js": "/suivi-sportif/static/js/main.b81f124c.js",
+    "static/media/Man.png": "/suivi-sportif/static/media/Man.9ced96fb460d15993aa9.png",
+    "static/media/Woman.png": "/suivi-sportif/static/media/Woman.56fcdc09355fb326136b.png",
+    "static/media/Logo.svg": "/suivi-sportif/static/media/Logo.b74690538d9fc0c1616eb6d5a332259f.svg",
+    "static/media/Carbs.svg": "/suivi-sportif/static/media/Carbs.aa0e74661df8c71ea59cbe777ac24615.svg",
+    "static/media/Fat.svg": "/suivi-sportif/static/media/Fat.82c6cb9fd2b3e6307fca82c2f796ed14.svg",
+    "static/media/Protein.svg": "/suivi-sportif/static/media/Protein.c285979616f56dc9dfa457e51c583d68.svg",
+    "static/media/Calories.svg": "/suivi-sportif/static/media/Calories.5db5a3aff9bd8f441f49792782c8262e.svg",
+    "index.html": "/suivi-sportif/index.html",
+    "main.d08e44fd.css.map": "/suivi-sportif/static/css/main.d08e44fd.css.map",
+    "main.b81f124c.js.map": "/suivi-sportif/static/js/main.b81f124c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d08e44fd.css",
+    "static/js/main.b81f124c.js"
+  ]
+}
